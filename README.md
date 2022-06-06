@@ -1,5 +1,5 @@
 # Nova Flash's PathFinder
-![](Pathfinder/Images/pathfindermarkdown.png)
+![](PathFinder/Images/pathfindermarkdown.png)
 
 # Purpose
 The purpose of this script is to create a randomly generated dungeon that utilizes tilesets created by the level designers. This script aims to allow modularity in terms of design and control for the user that uses the script. Currently, it is private, and no person is allowed to use it in their game. As of June 5, 2022, this script is only to be used for The Nova Experiment
