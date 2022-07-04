@@ -10,7 +10,7 @@ public class PathFinder : MonoBehaviour
     //Branching Rooms Added: 10 March 2022
 
     public GameObject debugCube, debugCube2;
-
+    private GeneratorTimer _timer;
 
     public GameObject Cross, Tee, Elbow, Path, DeadEnd;
 
@@ -40,7 +40,8 @@ public class PathFinder : MonoBehaviour
 
     private void Start()
     {
-        Profiler.BeginSample("Room Generation");
+        _timer = GameObject.Find("Timer").GetComponent<GeneratorTimer>();
+        _timer.AddToDic(Time.realtimeSinceStartup);
         GenerateMainPath();
         GenerateBranchingPaths();
 
@@ -60,7 +61,10 @@ public class PathFinder : MonoBehaviour
         GetRoomDirections();
         RemoveDuplicates();
         SpawnRooms();
-        Profiler.EndSample();
+
+        int allRooms = GameObject.FindGameObjectsWithTag("Room").Length;
+        _timer.SetCount(allRooms);
+
     }
     private void RemoveDuplicates()
     {
@@ -72,6 +76,7 @@ public class PathFinder : MonoBehaviour
                 //Debug.Log($"[{Rooms.Key}]: {test}");
             }    
         }
+        _timer.AddToDic(Time.realtimeSinceStartup);
     }
     
     private void CombineRooms() //ONLY TO BE USED IN A CHECK
@@ -103,8 +108,8 @@ public class PathFinder : MonoBehaviour
                 //Debug.Log($"Index: {_branch.Key}; Location: {location}");
             }
         }
-        
-        
+
+        _timer.AddToDic( Time.realtimeSinceStartup);
     }
 
     private void GetRoomDirections() 
@@ -143,7 +148,7 @@ public class PathFinder : MonoBehaviour
             }
         }
 
-
+        _timer.AddToDic(Time.realtimeSinceStartup);
     }
 
     private void GetDoorDirections(Vector3 location, int index)
@@ -309,7 +314,7 @@ public class PathFinder : MonoBehaviour
             }
         }
 
-
+        _timer.AddToDic(Time.realtimeSinceStartup);
     }
 
 
@@ -581,7 +586,7 @@ public class PathFinder : MonoBehaviour
 
 
 
-
+        _timer.AddToDic( Time.realtimeSinceStartup);
         //NOT TO BE USED IN ACTUAL BUILD
         #region DEBUG
         //foreach (Vector3 _location in RoomLocations)
@@ -626,7 +631,7 @@ public class PathFinder : MonoBehaviour
         }
 
 
-
+        _timer.AddToDic(Time.realtimeSinceStartup);
     }
 
     void GenerateNewBranchingPath()
@@ -847,3 +852,8 @@ public class PathFinder : MonoBehaviour
 
 
 }
+
+
+
+
+

@@ -10,9 +10,11 @@ public class Room : MonoBehaviour
     [SerializeField]List<string> myDirections = new List<string>();
     List<string> allDirections = new List<string> { "North", "South", "East", "West"};
     PathFinder pathFinder;
+    GeneratorTimer _timer;
     // Start is called before the first frame update
     void Start()
     {
+        _timer = GameObject.Find("Timer").GetComponent<GeneratorTimer>();
         pathFinder = GameObject.Find("Generator").GetComponent<PathFinder>();
         DoorLocations = pathFinder.GetDirections()[this.transform.position];
 
@@ -98,6 +100,7 @@ public class Room : MonoBehaviour
             if (i == alignment.Length - 1)
             {
                 this.enabled = false;
+                _timer.DecreaseCount();
             }
         }
     }
